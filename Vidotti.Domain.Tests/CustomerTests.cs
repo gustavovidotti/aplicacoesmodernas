@@ -6,7 +6,7 @@ namespace Vidotti.Domain.Tests
     [TestClass]
     public class CustomerTests
     {
-        private readonly User user = new User("gustavovidotti", "gustavovidotti");
+        //private readonly User user = new User("gustavovidotti", "gustavovidotti");
 
         // [TestMethod]
         // [TestCategory("Customer - New Customer")]
