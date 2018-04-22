@@ -3,6 +3,7 @@ using Vidotti.Domain.Commands.Inputs;
 using Vidotti.Domain.Commands.Results;
 using Vidotti.Domain.Entities;
 using Vidotti.Domain.Repositories;
+using Vidotti.Domain.Resources;
 using Vidotti.Domain.Services;
 using Vidotti.Domain.ValueObjects;
 using Vidotti.Shared.Commands;
@@ -51,11 +52,12 @@ namespace Vidotti.Domain.Commands.Handlers
             _customerRepository.Save(customer);
 
             // Passo 5. Enviar E-mail de boas vindas     
+            //https://foundation.zurb.com/emails/email-templates.html
             _emailService.Send(
                 customer.Name.ToString(),
                 customer.Email.Address,
-                "string.Format(EmailTemplates.WelcomeEmailTitle, customer.Name)",
-                "string.Format(EmailTemplates.WelcomeEmailBody, customer.Name)");
+                string.Format(EmailTemplates.WelcomeEmailTitle, customer.Name),
+                string.Format(EmailTemplates.WelcomeEmailBody, customer.Name));
 
             // Passo 6. Retornar algo
             return new RegisterCustomerCommandResult(customer.Id, customer.Name.ToString());
