@@ -4,6 +4,8 @@ namespace Vidotti.Domain.Entities
 {
     public class Product : Entity
     {
+        protected Product() { }
+
         public Product(string title, decimal price, string image, int quantityOnHand)
         {
             this.Title = title;
