@@ -10,10 +10,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Vidotti.Domain\Vidotti.Domain.csproj" />
+    <ProjectReference Include="..\Vidotti.Infra\Vidotti.Infra.csproj" />
+    <ProjectReference Include="..\Vidotti.Shared\Vidotti.Shared.csproj" />
   </ItemGroup>
 
 </Project>
