@@ -45,11 +45,11 @@ namespace Vidotti.Api.Controllers
         public async Task<IActionResult> Post([FromForm] AuthenticateUserCommand command)
         {
             if (command == null)
-                return await Response(null, new List<Notification> { new Notification("User", "Usuário ou senha inválidos") });
+                return await ResponseAsync(null, new List<Notification> { new Notification("User", "Usuário ou senha inválidos") });
 
             var identity = await GetClaims(command);
             if (identity == null)
-                return await Response(null, new List<Notification> { new Notification("User", "Usuário ou senha inválidos") });
+                return await ResponseAsync(null, new List<Notification> { new Notification("User", "Usuário ou senha inválidos") });
 
             var claims = new[]
             {

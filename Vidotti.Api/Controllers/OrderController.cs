@@ -22,7 +22,7 @@ namespace Vidotti.Api.Controllers
         public async Task<IActionResult> Post([FromBody]RegisterOrderCommand command)
         {
             var result = _handler.Handle(command);
-            return await Response(result, _handler.Notifications);
+            return await ResponseAsync(result, _handler.Notifications);
         }
     }
 }

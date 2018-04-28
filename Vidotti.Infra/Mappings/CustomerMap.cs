@@ -12,7 +12,7 @@ namespace Vidotti.Infra.Mappings
     {
         public CustomerMap()
         {
-            ToTable("Customer");
+            ToTable(nameof(Customer));
             HasKey(x => x.Id);
             Property(x => x.BirthDate);
             Property(x => x.Document.Number).IsRequired().HasMaxLength(11).IsFixedLength();

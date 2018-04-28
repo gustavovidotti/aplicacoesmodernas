@@ -12,7 +12,7 @@ namespace Vidotti.Infra.Mappings
     {
         public ProductMap()
         {
-            ToTable("Product");
+            ToTable(nameof(Product));
             HasKey(x => x.Id);
             Property(x => x.Image).IsRequired().HasMaxLength(1024);
             Property(x => x.Price);

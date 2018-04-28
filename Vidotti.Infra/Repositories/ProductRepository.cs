@@ -9,6 +9,7 @@ using Vidotti.Domain.Commands.Results;
 using Vidotti.Domain.Entities;
 using Vidotti.Domain.Repositories;
 using Vidotti.Infra.Contexts;
+using Vidotti.Shared;
 
 namespace Vidotti.Infra.Repositories
 {
@@ -32,7 +33,7 @@ namespace Vidotti.Infra.Repositories
         public IEnumerable<GetProductListCommandResult> Get()
         {
             var query = "SELECT [Id], [Title], [Price], [Image] FROM [Product]";
-            using (var conn = new SqlConnection(@"Server=localhost,11433;Database=vidottimodernstore;User ID=sa;Password=DockerSql2017!;"))
+            using (var conn = new SqlConnection(Runtime.ConnectionString))
             {
                 conn.Open();
                 return conn.Query<GetProductListCommandResult>(query);

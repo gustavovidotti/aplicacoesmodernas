@@ -17,7 +17,7 @@ namespace Vidotti.Api.Controllers
             _uow = uow;
         }
 
-        public async Task<IActionResult> Response(object result, IEnumerable<Notification> notifications)
+        public async Task<IActionResult> ResponseAsync(object result, IEnumerable<Notification> notifications)
         {
             if (!notifications.Any())
             {
@@ -30,7 +30,7 @@ namespace Vidotti.Api.Controllers
                         data = result
                     });
                 }
-                catch
+                catch (Exception)
                 {
                     // Logar o erro (Elmah)
                     return BadRequest(new

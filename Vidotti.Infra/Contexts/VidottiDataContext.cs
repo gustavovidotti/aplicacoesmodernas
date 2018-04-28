@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Vidotti.Domain.Entities;
 using Vidotti.Infra.Mappings;
+using Vidotti.Shared;
 
 namespace Vidotti.Infra.Contexts
 {
     public class VidottiDataContext : DbContext
     {
-        public VidottiDataContext() : base(@"Server=localhost,11433;Database=vidottimodernstore;User ID=sa;Password=DockerSql2017!;")
+        public VidottiDataContext() : base(Runtime.ConnectionString)
         {
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;

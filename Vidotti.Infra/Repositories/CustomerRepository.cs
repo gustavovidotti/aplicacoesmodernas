@@ -10,6 +10,7 @@ using Vidotti.Domain.Commands.Results;
 using Vidotti.Domain.Entities;
 using Vidotti.Domain.Repositories;
 using Vidotti.Infra.Contexts;
+using Vidotti.Shared;
 
 namespace Vidotti.Infra.Repositories
 {
@@ -54,7 +55,7 @@ namespace Vidotti.Infra.Repositories
             return _context.Customers.Any(x => x.Document.Number == document);
         }
 
-        public GetCustomerCommandResult Get(string username)
+        public static GetCustomerCommandResult Get(string username)
         {
             //return _context
             //    .Customers
@@ -72,7 +73,7 @@ namespace Vidotti.Infra.Repositories
             //    .FirstOrDefault(x => x.Username == username);
 
             var query = "SELECT * FROM [GetCustomerInfoView] WHERE [Active]=1 AND [Username]=@username";
-            using (var conn = new SqlConnection(@"Server=localhost,11433;Database=vidottimodernstore;User ID=sa;Password=DockerSql2017!;"))
+            using (var conn = new SqlConnection(Runtime.ConnectionString))
             {
                 conn.Open();
                 return conn

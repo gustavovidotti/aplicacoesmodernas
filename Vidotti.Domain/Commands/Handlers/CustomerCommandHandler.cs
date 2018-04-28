@@ -27,7 +27,7 @@ namespace Vidotti.Domain.Commands.Handlers
             // Passo 1. Verificar se o CPF já existe
             if (_customerRepository.DocumentExists(command.Document))
             {
-                AddNotification("Document", "Este CPF já está em uso!");
+                AddNotification(nameof(Document), "Este CPF já está em uso!");
                 return null;
             }
 

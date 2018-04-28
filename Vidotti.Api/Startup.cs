@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Vidotti.Api.Security;
@@ -19,6 +20,7 @@ using Vidotti.Infra.Contexts;
 using Vidotti.Infra.Repositories;
 using Vidotti.Infra.Services;
 using Vidotti.Infra.Transactions;
+using Vidotti.Shared;
 
 namespace Vidotti.Api
 {
@@ -30,7 +32,19 @@ namespace Vidotti.Api
         private const string AUDIENCE = "B5C8935F2620";
         private const string SECRET_KEY = "3418C3C4-1CE1-4107-A641-7451D078B62E";
 
+        public IConfiguration Configuration { get; set; }
+
         private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SECRET_KEY));
+
+        public Startup(IHostingEnvironment env)
+        {
+            var configurationBuilder = new ConfigurationBuilder()
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddEnvironmentVariables();
+
+            Configuration = configurationBuilder.Build();
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -135,6 +149,8 @@ namespace Vidotti.Api
 
             app.UseAuthentication();
             app.UseMvc();
+
+            Runtime.ConnectionString = Configuration.GetConnectionString("CnnStr");
         }
     }
 }

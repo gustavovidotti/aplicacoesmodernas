@@ -17,7 +17,7 @@ namespace Vidotti.Domain.Entities
 
             AddNotifications(new ValidationContract()
             .Requires()
-            .AreEquals(Password, EncryptPassword(confirmPassword), "Password", "As senhas não coincidem"));
+            .AreEquals(Password, EncryptPassword(confirmPassword), nameof(Password), "As senhas não coincidem"));
         }
 
         public string Username { get; private set; }
@@ -29,14 +29,14 @@ namespace Vidotti.Domain.Entities
             if (Username == username && Password == EncryptPassword(password))
                 return true;
 
-            AddNotification("User", "Usuário ou senha inválidos");
+            AddNotification(nameof(User), "Usuário ou senha inválidos");
             return false;
         }
 
         public void Activate() => Active = true;
         public void Deactivate() => Active = false;
 
-        private string EncryptPassword(string pass)
+        private static string EncryptPassword(string pass)
         {
             if (string.IsNullOrEmpty(pass)) return "";
             var password = (pass += "|2d331cca-f6c0-40c0-bb43-6e32989c2881");

@@ -12,7 +12,7 @@ namespace Vidotti.Infra.Mappings
     {
         public OrderItemMap()
         {
-            ToTable("OrderItem");
+            ToTable(nameof(OrderItem));
             HasKey(x => x.Id);
             Property(x => x.Price).HasColumnType("money");
             Property(x => x.Quantity);

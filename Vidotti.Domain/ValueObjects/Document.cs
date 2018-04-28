@@ -11,11 +11,11 @@ namespace Vidotti.Domain.ValueObjects
             Number = number;
 
             AddNotifications(new ValidationContract()
-                .IsTrue(Validate(Number), "Document", "CPF inválido"));
+                .IsTrue(Validate(Number), nameof(Document), "CPF inválido"));
         }
         public string Number { get; private set; }
 
-        public bool Validate(string cpf)
+        public static bool Validate(string cpf)
         {
             var multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             var multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };

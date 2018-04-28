@@ -12,7 +12,7 @@ namespace Vidotti.Infra.Mappings
     {
         public UserMap()
         {
-            ToTable("User");
+            ToTable(nameof(User));
             HasKey(x => x.Id);
             Property(x => x.Username).IsRequired().HasMaxLength(20);
             Property(x => x.Password).IsRequired().HasMaxLength(32).IsFixedLength();
